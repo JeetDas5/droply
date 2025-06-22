@@ -20,7 +20,7 @@ export const files = pgTable("files", {
   thumbnailUrl: text("thumbnail_url"),
 
   userId: text("user_id").notNull(),
-  parentId: uuid("parent_id"),
+  parentId: uuid("parent_id"), //null for root folders
 
   isFolder: boolean("is_folder").default(false).notNull(),
   isStarred: boolean("is_starred").default(false).notNull(),
