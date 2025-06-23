@@ -18,14 +18,12 @@ export async function GET() {
     const authParams = imagekit.getAuthenticationParameters();
 
     return NextResponse.json(authParams, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      {
-        error:
-          error.message ||
-          "Failed to generate authentication parameter for Imagekit",
-      },
-      { status: 500 }
-    );
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { error: error.message || "Failed to get authentication parameters" },
+        { status: 500 }
+      );
+    }
   }
 }

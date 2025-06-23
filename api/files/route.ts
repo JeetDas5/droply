@@ -40,11 +40,13 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(userFiles, { status: 200 });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error fetching files:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch files" },
-      { status: 500 }
-    );
+    if( error instanceof Error) {
+      return NextResponse.json(
+        { error: error.message || "Failed to fetch files" },
+        { status: 500 }
+      );
+    }
   }
 }
